@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="lib/toastunoify.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="style-cambiar-modo.css">
+</head>
+<body>
+
+
+
+    <div class="sidebar position-fixed">
+        <ul class="nav flex-column p-3">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Perfil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="geolocalizacion.html">Mapa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="mostrarConsejo()" href="#">consejos</a>
+             
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="ChangeDarkMode()" href="#">cambiar modo</a>
+             
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="logout()">Cerrar Sesión</a>
+            </li>
+        </ul>
+    </div>
+
+    
+    <button id="consejoBtn" onclick="mostrarConsejo()">consejo</button>
+    <button id="darkModeSwitch" onclick="ChangeDarkMode()">👻</button>
+    
+
+<div id="app">
+    <header>
+        <h1>Simulación de Instagram</h1>
+        <p id="fecha-hora"></p>
+        <div id="toastuno" class="toastuno"></div>
+    </header> 
+<!-- 1. Creacion del campo para imagen y para comentario -->
+<div id="upload-form">
+    <input type="file" id="photo-input" accept="imagen/*">
+    <textarea id="comment-input" placeholder="Agrega un comentario"></textarea>
+    <button id="upload-button">Subir</button>
+</div>
+<!-- 2. Es el espacio para agregar la imagen, mi comentario, el comentario de la gente, y el contador -->
+
+<div id="feed"></div>
+
+
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="script.js"></script>
+<script src="fecha.js"></script>
+<script src="consejos.js"></script>
+<script src="modo-oscuro.js"></script>
+
+<script>
+    window.onload = function(){
+        let login = localStorage.getItem('logueado')
+        if(login != 'true'){
+            // alert('acceso restringido');
+             // Swal.fire("SweetAlert2 is working!"); adentro del parentesis hago el cambio
+             Swal.fire({
+    title: "ACCESO RESTRINGIDO",
+    width: 600,
+    padding: "3em",
+    color: "#716add",
+    background: "#fff url(/images/trees.png)",
+    backdrop: `
+      rgba(0,0,123,0.4)
+      url("/img/gif-lobo.gif")
+      left top
+      no-repeat
+    `
+  }).then((result)=>{
+            if(result.isConfirmed){
+                Swal.fire({
+                title:'titulo',
+                text:'decripcion',
+                icon:'error',
+                confirmButtonText: 'confirmar'});
+            }
+            window.location.href = 'login.html';
+        })
+        ;
+
+        }
+    }
+
+    function logout(){
+        localStorage.removeItem('logueado');
+        window.location.href = 'login.html';
+    }
+</script>
+
+
+
+
+</body>
+</html>
